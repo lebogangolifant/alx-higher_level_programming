@@ -1,0 +1,12 @@
+#!/usr/bin/python3
+
+import os
+import py_compile
+
+pyfile = os.environ.get("PYFILE")
+if pyfile:
+    pycfile = pyfile + "c"
+    print(f"Compiling {pyfile} ...")
+    py_compile.compile(pyfile, pycfile)
+else:
+    print("No PYFILE environment variable found.")
