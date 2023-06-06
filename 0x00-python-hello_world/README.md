@@ -1,7 +1,7 @@
 
 # 0x00. Python - Hello, World
 
-This project focuses on the basics of Python programming. It covers various concepts and resources to get started with Python.
+This project focuses on the basics of Python programming. It covers various concepts to get started with Python.
 
 ## Concepts
 
