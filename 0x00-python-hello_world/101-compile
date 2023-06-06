@@ -1,12 +1,7 @@
-#!/usr/bin/python3
+#!/bin/bash
+filename=$PYFILE
+output_filename="${filename}c"
+python3 -m compileall -b "$filename"
+mv "$filename" "$output_filename"
+echo "Compiling $filename ..."
 
-import os
-import py_compile
-
-pyfile = os.environ.get("PYFILE")
-if pyfile:
-    pycfile = pyfile + "c"
-    print(f"Compiling {pyfile} ...")
-    py_compile.compile(pyfile, pycfile)
-else:
-    print("No PYFILE environment variable found.")
