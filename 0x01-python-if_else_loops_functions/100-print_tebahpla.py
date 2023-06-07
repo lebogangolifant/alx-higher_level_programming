@@ -1,8 +1,9 @@
 #!/usr/bin/python3
+output = ""
 for ascii_value in range(122, 96, -1):
     if ascii_value % 2 == 0:
-        print(chr(ascii_value), end="")
+        output += "{:c}".format(ascii_value)
     else:
-        print(chr(ascii_value - 32), end="")
+        output += "{:c}".format(ascii_value - 32)
 
-print(end="")
+print(output, end="")
