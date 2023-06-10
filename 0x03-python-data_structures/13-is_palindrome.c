@@ -21,16 +21,19 @@ int is_palindrome(listint_t **head)
 		list_size++;
 		current = current->next;
 	}
+
 	int half_size = list_size / 2;
 	int index;
 
 	current = *head;
+
 	for (index = 0; index < half_size; index++)
 		current = current->next;
+
 	listint_t *previous = NULL;
 	listint_t *next_node = NULL;
 	listint_t *second_half = current;
-
+	
 	while (current != NULL)
 	{
 		next_node = current->next;
@@ -38,8 +41,8 @@ int is_palindrome(listint_t **head)
 		previous = current;
 		current = next_node;
 	}
-	listint_t *first_half = *head;
 
+	listint_t *first_half = *head;
 	second_half = previous;
 
 	while (second_half != NULL)
