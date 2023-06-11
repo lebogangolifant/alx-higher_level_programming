@@ -2,55 +2,38 @@
 
 /**
  * is_palindrome - Checks if a singly linked list is a palindrome.
- *
  * @head: Pointer to the head of the linked list.
  *
- * Return: 1 if the linked list is a palindrome, 0 otherwise.
+ * Return: 0 if it is not a palindrome, 1 if it is a palindrome.
  */
 
 int is_palindrome(listint_t **head)
 {
+	listint_t *slow = *head;
+	listint_t *fast = *head;
+	listint_t *prev = NULL;
+	listint_t *temp;
+
 	if (*head == NULL || (*head)->next == NULL)
 		return (1);
 
-	int list_size = 0;
-	listint_t *current = *head;
-
-	while (current != NULL)
+	while (fast != NULL && fast->next != NULL)
 	{
-		list_size++;
-		current = current->next;
+		fast = fast->next->next;
+		temp = slow->next;
+		slow->next = prev;
+		prev = slow;
+		slow = temp;
 	}
 
-	int half_size = list_size / 2;
-	int index;
-
-	current = *head;
-
-	for (index = 0; index < half_size; index++)
-		current = current->next;
-
-	listint_t *previous = NULL;
-	listint_t *next_node = NULL;
-	listint_t *second_half = current;
-	
-	while (current != NULL)
+	if (fast != NULL)
+		slow = slow->next;
+	while (slow != NULL)
 	{
-		next_node = current->next;
-		current->next = previous;
-		previous = current;
-		current = next_node;
-	}
-
-	listint_t *first_half = *head;
-	second_half = previous;
-
-	while (second_half != NULL)
-	{
-		if (first_half->n != second_half->n)
+		if (prev->n != slow->n)
 			return (0);
-		first_half = first_half->next;
-		second_half = second_half->next;
+		prev = prev->next;
+		slow = slow->next;
 	}
 	return (1);
 }
