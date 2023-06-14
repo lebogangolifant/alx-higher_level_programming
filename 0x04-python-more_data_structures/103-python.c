@@ -4,6 +4,7 @@
 
 /**
  * print_python_list - Prints basic information about a Python list.
+ *
  * @p: Python list object.
  */
 
@@ -26,6 +27,7 @@ void print_python_list(PyObject *p)
 
 /**
  * print_python_bytes - Prints basic information about a Python bytes object.
+ *
  * @p: Python bytes object.
  */
 
