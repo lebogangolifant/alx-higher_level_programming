@@ -6,7 +6,8 @@ def list_division(my_list_1, my_list_2, list_length):
         try:
             division_result = 0
             if idx < len(my_list_1) and idx < len(my_list_2):
-                if type(my_list_1[idx]) in (int, float) and type(my_list_2[idx]) in (int, float):
+                if type(my_list_1[idx]) in (int, float) and \
+                   type(my_list_2[idx]) in (int, float):
                     if my_list_2[idx] != 0:
                         division_result = my_list_1[idx] / my_list_2[idx]
                     else:
