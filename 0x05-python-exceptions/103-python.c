@@ -1,4 +1,4 @@
-#include "Python.h"
+#include <Python.h>
 
 /**
  * print_python_list - Print basic information about a Python list object.
@@ -12,8 +12,7 @@ void print_python_list(PyObject *p)
 
 	if (!PyList_Check(p))
 	{
-		printf("[*] Python list info\n  [ERROR]
-				Invalid List Object\n");
+		printf("[*] Python list info\n  [ERROR] Invalid List Object\n");
 		fflush(stdout);
 		return;
 	}
@@ -46,8 +45,7 @@ void print_python_bytes(PyObject *p)
 
 	if (!PyBytes_Check(p))
 	{
-		printf("[.] bytes object info\n
-				[ERROR] Invalid Bytes Object\n");
+		printf("[.] bytes object info\n [ERROR] Invalid Bytes Object\n");
 		fflush(stdout);
 		return;
 	}
@@ -80,8 +78,7 @@ void print_python_float(PyObject *p)
 
 	if (!PyFloat_Check(p))
 	{
-		printf("[.] float object info\n
-				[ERROR] Invalid Float Object\n");
+		printf("[.] float object info\n [ERROR] Invalid Float Object\n");
 		fflush(stdout);
 		return;
 	}
