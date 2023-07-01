@@ -1,0 +1,52 @@
+Test cases for the matrix_divided function.
+
+This module contains test cases to verify the correctness of the matrix_divided function
+in the 2-matrix_divided.py module.
+
+Usage:
+    Run the test cases using the command: python3 -m doctest ./tests/2-matrix_divided.txt
+
+Test Cases:
+    >>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
+    # Test case 1: Dividing matrix by 3
+    >>> matrix = [[1, 2, 3], [4, 5, 6]]
+    >>> matrix_divided(matrix, 3)
+    [[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+
+    # Test case 2: Dividing matrix by 2
+    >>> matrix = [[4, 8], [12, 16]]
+    >>> matrix_divided(matrix, 2)
+    [[2.0, 4.0], [6.0, 8.0]]
+
+    # Test case 3: Dividing matrix by 0 (zero division)
+    >>> matrix = [[1, 2, 3], [4, 5, 6]]
+    >>> try:
+    ...     matrix_divided(matrix, 0)
+    ... except ZeroDivisionError as e:
+    ...     str(e)
+    'division by zero'
+
+    # Test case 4: Dividing matrix with non-number divisor (TypeError)
+    >>> matrix = [[1, 2, 3], [4, 5, 6]]
+    >>> try:
+    ...     matrix_divided(matrix, "2")
+    ... except TypeError as e:
+    ...     str(e)
+    'div must be a number'
+
+    # Test case 5: Dividing non-matrix object (TypeError)
+    >>> matrix = "not a matrix"
+    >>> try:
+    ...     matrix_divided(matrix, 2)
+    ... except TypeError as e:
+    ...     str(e)
+    'matrix must be a matrix (list of lists) of integers/floats'
+
+    # Test case 6: Dividing matrix with different row sizes (TypeError)
+    >>> matrix = [[1, 2, 3], [4, 5]]
+    >>> try:
+    ...     matrix_divided(matrix, 2)
+    ... except TypeError as e:
+    ...     str(e)
+    'Each row of the matrix must have the same size'
