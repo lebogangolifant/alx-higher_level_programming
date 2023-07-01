@@ -1,0 +1,45 @@
+Test cases for the add_integer function.
+
+This module contains test cases to verify the correctness of the add_integer function
+in the 0-add_integer.py module.
+
+Usage:
+    Run the test cases using the command: python3 -m doctest ./tests/0-add_integer.txt
+
+Test Cases:
+    >>> add_integer = __import__('0-add_integer').add_integer
+
+    # Test case 1: Adding two positive integers
+    >>> add_integer(1, 2)
+    3
+
+    # Test case 2: Adding a positive integer and a negative integer
+    >>> add_integer(100, -2)
+    98
+
+    # Test case 3: Adding a positive integer and the default value (98)
+    >>> add_integer(2)
+    100
+
+    # Test case 4: Adding a float and a negative integer
+    >>> add_integer(100.3, -2)
+    98
+
+    # Test case 5: Adding an integer and a non-integer (string)
+    >>> try:
+    ...     add_integer(4, "School")
+    ... except Exception as e:
+    ...     print(e)
+    a must be an integer or b must be an integer
+
+    # Test case 6: Adding None (null value)
+    >>> try:
+    ...     add_integer(None)
+    ... except Exception as e:
+    ...     print(e)
+    a must be an integer or b must be an integer
+
+    # Test case 7: Checking that test files are inside a folder named 'tests'
+    >>> import os
+    >>> os.path.isdir("tests")
+    True
