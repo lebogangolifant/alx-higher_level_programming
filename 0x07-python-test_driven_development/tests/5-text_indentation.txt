@@ -1,0 +1,42 @@
+Test cases for the text_indentation function.
+
+This module contains test cases to verify the correctness of the text_indentation function
+in the text_indentation module. The function prints a text with 2 new lines after each
+occurrence of '.', '?', and ':' characters.
+
+Usage:
+    Run the test cases using the command: python3 -m doctest ./tests/5-text_indentation.txt
+
+Test Cases:
+>>> from text_indentation import text_indentation
+
+# Test case 1: Print a text with multiple sentences
+>>> text_indentation("Hello. How are you?")
+Hello.
+How are you?
+
+# Test case 2: Print a text with question marks
+>>> text_indentation("One? Two? Three?")
+One?
+Two?
+Three?
+
+# Test case 3: Print a text without any special characters
+>>> text_indentation("No colon")
+No colon
+
+# Test case 4: Print a text with an empty string (no output)
+>>> text_indentation("")
+
+# Test case 5: Print a text with different punctuation marks
+>>> text_indentation("This is a test. Does it work?")
+This is a test.
+Does it work?
+
+# Test case 6: Print a text with no question mark
+>>> text_indentation("No question mark?")
+No question mark?
+
+# Test case 7: Print a text with no period
+>>> text_indentation("No period")
+No period
