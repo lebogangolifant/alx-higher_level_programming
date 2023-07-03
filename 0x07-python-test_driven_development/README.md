@@ -1,7 +1,12 @@
 
 # 0x07 Python - Test-driven development
 
-Solutions for the tasks related to Test-driven development in Python.
+Test-driven development; tasks solutions in Python.
+
+## Concepts
+
+- __Unit Testing__
+- __Doc Tests__
 
 ## Function Files
 
@@ -28,7 +33,7 @@ Solutions for the tasks related to Test-driven development in Python.
 
 ## Running the tests
 
-__To run the unit tests, use the following command:__
+__To run the doc tests, use the following command:__
 
 ```
 python3 -m doctest -v ./tests/filename.txt
@@ -48,5 +53,5 @@ or
 python3 -m unittest tests.6-max_integer_test 2>&1 | tail -1
 ```
 
-This command will automatically discover and execute all the test files in the `tests` directory. The test results will be displayed, indicating whether each test passed or failed.
+The commands will automatically discover and execute all the test files in the `tests` directory. The test results will be displayed, indicating whether each test passed or failed.
 
