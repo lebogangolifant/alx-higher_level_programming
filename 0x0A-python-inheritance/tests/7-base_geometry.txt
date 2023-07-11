@@ -1,55 +1,57 @@
-"""
-This module contains test cases for Task 7: Python - Integer Validation.
-"""
+Test cases module for the BaseGeometry class
 
-# Test case 1: Valid integer value
-"""
-Test the integer_validator method with a valid integer value.
+
+Import module:
 
 >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+Class Initialization:
+
 >>> bg = BaseGeometry()
->>> bg.integer_validator("my_int", 12)
-"""
 
-# Test case 2: Non-integer value
-"""
-Test the integer_validator method with a non-integer value.
+Test case 1: Calling the area() method without implementation
 
->>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
->>> bg = BaseGeometry()
->>> try:
-...     bg.integer_validator("name", "John")
-... except Exception as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[TypeError] name must be an integer
-"""
+>>> bg.area()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "7-base_geometry.py", line <line number>, in area
+    raise Exception("area() is not implemented")
+Exception: area() is not implemented
 
-# Test case 3: Zero value
-"""
-Test the integer_validator method with a zero value.
+Test case 2: Validating integer values with the integer_validator() method
 
->>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
->>> bg = BaseGeometry()
->>> try:
-...     bg.integer_validator("age", 0)
-... except Exception as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[ValueError] age must be greater than 0
-"""
+>>> bg.integer_validator("width", 10)
+>>> bg.integer_validator("height", 5)
 
-# Test case 4: Negative value
-"""
-Test the integer_validator method with a negative value.
+Test case 3: Validating non-integer values with the integer_validator() method
 
->>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
->>> bg = BaseGeometry()
->>> try:
-...     bg.integer_validator("distance", -4)
-... except Exception as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[ValueError] distance must be greater than 0
-"""
+>>> bg.integer_validator("name", "John")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "7-base_geometry.py", line <line number>, in integer_validator
+    raise TypeError("{} must be an integer".format(name))
+TypeError: name must be an integer
 
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod()
+Test case 4: Validating non-positive integer values with the integer_validator() method
+
+>>> bg.integer_validator("size", -3)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "7-base_geometry.py", line <line number>, in integer_validator
+    raise ValueError("{} must be greater than 0".format(name))
+ValueError: size must be greater than 0
+
+Test case 5: Validating zero value with the integer_validator() method
+
+>>> bg.integer_validator("count", 0)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "7-base_geometry.py", line <line number>, in integer_validator
+    raise ValueError("{} must be greater than 0".format(name))
+ValueError: count must be greater than 0
+
+Test case 6: Validating different attribute names and values
+
+>>> bg.integer_validator("length", 15)
+>>> bg.integer_validator("quantity", 8)
+>>> bg.integer_validator("age", 20)
