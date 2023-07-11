@@ -1,71 +1,50 @@
-"""
-This module contains test cases for Task 1: Python - Inheritance.
-"""
+Test cases for the "Print sorted" module
 
-# Test case 1: print_sorted with multiple elements
-"""
-Test the print_sorted method with multiple elements.
+
+Import module:
 
 >>> MyList = __import__('1-my_list').MyList
+
+
+Test cases:
+
+Test case #1: Sorting a disordered list of positive integers
+
 >>> my_list = MyList()
->>> my_list.append(5)
->>> my_list.append(2)
->>> my_list.append(4)
->>> my_list.append(1)
->>> my_list.append(3)
+>>> my_list.extend([1, 4, 2, 3, 5])
+>>> print(my_list)
 >>> my_list.print_sorted()
-[1, 2, 3, 4, 5]
-"""
+>>> print(my_list)
 
-# Test case 2: print_sorted with descending order
-"""
-Test the print_sorted method with elements in descending order.
+Test case #2: Sorting an empty list
 
->>> MyList = __import__('1-my_list').MyList
 >>> my_list = MyList()
->>> my_list.append(9)
->>> my_list.append(7)
->>> my_list.append(6)
->>> my_list.append(8)
->>> my_list.append(10)
+>>> print(my_list)
 >>> my_list.print_sorted()
-[6, 7, 8, 9, 10]
-"""
+>>> print(my_list)
 
-# Test case 3: print_sorted with sorted elements
-"""
-Test the print_sorted method with already sorted elements.
+Test case #3: Sorting a list of negative integers
 
->>> MyList = __import__('1-my_list').MyList
 >>> my_list = MyList()
->>> my_list.append(1)
->>> my_list.append(3)
->>> my_list.append(2)
+>>> my_list.extend([-5, -4, -3, -2, -1])
+>>> print(my_list)
 >>> my_list.print_sorted()
-[1, 2, 3]
-"""
+>>> print(my_list)
 
-# Test case 4: print_sorted with a single element
-"""
-Test the print_sorted method with a single element.
+Test case #4: Sorting a disordered list of negative integers
 
->>> MyList = __import__('1-my_list').MyList
 >>> my_list = MyList()
->>> my_list.append(1)
+>>> my_list.extend([-1, -4, -2, -3, -5])
+>>> print(my_list)
 >>> my_list.print_sorted()
-[1]
-"""
+>>> print(my_list)
 
-# Test case 5: print_sorted with an empty list
-"""
-Test the print_sorted method with an empty list.
+Test case #5: Trying to call print_sorted() on a non-MyList object
 
->>> MyList = __import__('1-my_list').MyList
->>> my_list = MyList()
->>> my_list.print_sorted()
-[]
-"""
-
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod()
+>>> my_list = (1, 2)
+>>> print(my_list)
+>>> try:
+...     my_list.print_sorted()
+... except AttributeError as e:
+...     print(e)
+...     print(my_list)
