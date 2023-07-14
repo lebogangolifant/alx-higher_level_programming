@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module that manages the id attribute for all other classes in the project"""
 
+
 class Base:
     """Base class for managing id attribute"""
 
