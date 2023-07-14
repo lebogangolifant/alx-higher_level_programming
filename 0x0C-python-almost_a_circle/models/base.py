@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module that manages the id attribute for all other classes in the project"""
 import json
+import csv
 
 
 class Base:
@@ -64,3 +65,41 @@ class Base:
                 return instances
         except FileNotFoundError:
             return []
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Serialize list_objs to CSV format and save to a file"""
+        filename = cls.__name__ + ".csv"
+        with open(filename, "w", newline="") as file:
+            writer = csv.writer(file)
+            if list_objs is not None:
+                for obj in list_objs:
+                    writer.writerow(obj.to_csv_row())
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Deserialize instances from a CSV file and return as a list"""
+        filename = cls.__name__ + ".csv"
+        instances = []
+        try:
+            with open(filename, "r", newline="") as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    instance = cls.create_from_csv_row(row)
+                    instances.append(instance)
+        except FileNotFoundError:
+            pass
+        return instances
+
+    def to_dictionary(self):
+        """Return the dictionary representation of an instance"""
+        return self.__dict__.copy()
+
+    @classmethod
+    def create_from_csv_row(cls, row):
+        """Create an instance from a CSV row"""
+        raise NotImplementedError
+
+    def to_csv_row(self):
+        """Return the CSV row representation of an instance"""
+        raise NotImplementedError
