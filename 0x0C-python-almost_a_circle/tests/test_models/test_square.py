@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Unittest module for square class"""
+"""Unittest module for a square class"""
 
 
 import unittest
