@@ -2,6 +2,7 @@
 """Module that manages the id attribute for all other classes in the project"""
 import json
 import csv
+import pygame
 
 
 class Base:
@@ -103,3 +104,35 @@ class Base:
     def to_csv_row(self):
         """Return the CSV row representation of an instance"""
         raise NotImplementedError
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        pygame.init()
+
+        width = 800
+        height = 600
+        window = pygame.display.set_mode((width, height))
+        pygame.display.set_caption("Drawing Rectangles and Squares")
+
+        white = (255, 255, 255)
+        black = (0, 0, 0)
+
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+
+            window.fill(white)
+
+            for rect in list_rectangles:
+                pygame.draw.rect(window, black, pygame.Rect(rect.x, rect.y,
+                                 rect.width, rect.height))
+
+            for square in list_squares:
+                pygame.draw.rect(window, black, pygame.Rect(square.x, square.y,
+                                                            square.size,
+                                                            square.size))
+            pygame.display.flip()
+
+        pygame.quit()
