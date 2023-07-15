@@ -70,13 +70,11 @@ The `Square` class represents a square shape, which is a special case of a recta
 
 ## Testing
 
-This project includes a set of unit tests to ensure the correctness of the implemented classes and methods. The tests are located in the `tests` directory and can be run using the following command:
+This project includes a set of unit tests to ensure the correctness of the implemented classes and methods. The tests are located in the `tests/test_models` directory and can be run using the following command:
 
 ```bash
 python3 -m unittest discover tests
 ```
-
-Make sure you have the necessary dependencies installed before running the tests.
 
 
 
