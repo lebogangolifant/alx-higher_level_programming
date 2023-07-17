@@ -2,7 +2,7 @@
 """Module that manages the id attribute for all other classes in the project"""
 import json
 import csv
-import pygame
+import turtle
 
 
 class Base:
@@ -31,6 +31,43 @@ class Base:
         if json_string is None or len(json_string) == 0:
             return []
         return json.loads(json_string)
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """Draw Rectangles and Squares using the Turtle graphics module """
+        screen = turtle.Screen()
+        screen.bgcolor("#b7312c")
+        turt = turtle.Turtle()
+        turt.pensize(3)
+        turt.shape("turtle")
+
+    def draw_rectangle(rect):
+        turt.up()
+        turt.goto(rect.x, rect.y)
+        turt.down()
+        turt.color("#ffffff")
+        for _ in range(2):
+            turt.forward(rect.width)
+            turt.left(90)
+            turt.forward(rect.height)
+            turt.left(90)
+
+    def draw_square(sq):
+        turt.up()
+        turt.goto(sq.x, sq.y)
+        turt.down()
+        turt.color("#b5e3d8")
+        for _ in range(4):
+            turt.forward(sq.side_length)
+            turt.left(90)
+
+    for rect in list_rectangles:
+        draw_rectangle(rect)
+
+    for sq in list_squares:
+        draw_square(sq)
+
+    turtle.done()
 
     @classmethod
     def save_to_file(cls, list_objs):
@@ -104,35 +141,3 @@ class Base:
     def to_csv_row(self):
         """Return the CSV row representation of an instance"""
         raise NotImplementedError
-
-    @staticmethod
-    def draw(list_rectangles, list_squares):
-        pygame.init()
-
-        width = 800
-        height = 600
-        window = pygame.display.set_mode((width, height))
-        pygame.display.set_caption("Drawing Rectangles and Squares")
-
-        white = (255, 255, 255)
-        black = (0, 0, 0)
-
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-
-            window.fill(white)
-
-            for rect in list_rectangles:
-                pygame.draw.rect(window, black, pygame.Rect(rect.x, rect.y,
-                                 rect.width, rect.height))
-
-            for square in list_squares:
-                pygame.draw.rect(window, black, pygame.Rect(square.x, square.y,
-                                                            square.size,
-                                                            square.size))
-            pygame.display.flip()
-
-        pygame.quit()
