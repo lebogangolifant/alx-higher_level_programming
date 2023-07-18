@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """Module that manages the id attribute for all other classes in the project"""
 import json
 import csv
@@ -21,123 +22,115 @@ class Base:
     @staticmethod
     def to_json_string(list_dictionaries):
         """Return the JSON string representation of list_dictionaries"""
-        if list_dictionaries is None or len(list_dictionaries) == 0:
+        if list_dictionaries is None or list_dictionaries == []:
             return "[]"
         return json.dumps(list_dictionaries)
-
-    @staticmethod
-    def from_json_string(json_string):
-        """Return the list of objects represented by the JSON string"""
-        if json_string is None or len(json_string) == 0:
-            return []
-        return json.loads(json_string)
-
-    @staticmethod
-    def draw(list_rectangles, list_squares):
-        """Draw Rectangles and Squares using the Turtle graphics module """
-        screen = turtle.Screen()
-        screen.bgcolor("#b7312c")
-        turt = turtle.Turtle()
-        turt.pensize(3)
-        turt.shape("turtle")
-
-    def draw_rectangle(rect):
-        turt.up()
-        turt.goto(rect.x, rect.y)
-        turt.down()
-        turt.color("#ffffff")
-        for _ in range(2):
-            turt.forward(rect.width)
-            turt.left(90)
-            turt.forward(rect.height)
-            turt.left(90)
-
-    def draw_square(sq):
-        turt.up()
-        turt.goto(sq.x, sq.y)
-        turt.down()
-        turt.color("#b5e3d8")
-        for _ in range(4):
-            turt.forward(sq.side_length)
-            turt.left(90)
-
-    for rect in list_rectangles:
-        draw_rectangle(rect)
-
-    for sq in list_squares:
-        draw_square(sq)
-
-    turtle.done()
 
     @classmethod
     def save_to_file(cls, list_objs):
         """Write the JSON string representation of list_objs to a file"""
         filename = cls.__name__ + ".json"
-        json_list = []
-        if list_objs is not None:
-            json_list = [obj.to_dictionary() for obj in list_objs]
-        with open(filename, "w") as file:
-            file.write(cls.to_json_string(json_list))
+        with open(filename, "w") as jsonfile:
+            if list_objs is None:
+                jsonfile.write("[]")
+            else:
+                list_dicts = [o.to_dictionary() for o in list_objs]
+                jsonfile.write(Base.to_json_string(list_dicts))
+
+    @staticmethod
+    def from_json_string(json_string):
+        """Return the list of objects represented by the JSON string"""
+        if json_string is None or json_string == "[]":
+            return []
+        return json.loads(json_string)
 
     @classmethod
     def create(cls, **dictionary):
         """Return an instance with all attributes already set"""
-        if cls.__name__ == "Rectangle":
-            dummy = cls(1, 1)
-        elif cls.__name__ == "Square":
-            dummy = cls(1)
-        else:
-            dummy = None
-        dummy.update(**dictionary)
-        return dummy
+        if dictionary and dictionary != {}:
+            if cls.__name__ == "Rectangle":
+                new = cls(1, 1)
+            else:
+                new = cls(1)
+            new.update(**dictionary)
+            return new
 
     @classmethod
     def load_from_file(cls):
         """Return a list of instances from a file"""
-        filename = cls.__name__ + ".json"
+        filename = str(cls.__name__) + ".json"
         try:
-            with open(filename, "r") as file:
-                json_data = file.read()
-                data = cls.from_json_string(json_data)
-                instances = [cls.create(**d) for d in data]
-                return instances
-        except FileNotFoundError:
+            with open(filename, "r") as jsonfile:
+                list_dicts = Base.from_json_string(jsonfile.read())
+                return [cls.create(**d) for d in list_dicts]
+        except IOError:
             return []
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
         """Serialize list_objs to CSV format and save to a file"""
         filename = cls.__name__ + ".csv"
-        with open(filename, "w", newline="") as file:
-            writer = csv.writer(file)
-            if list_objs is not None:
+        with open(filename, "w", newline="") as csvfile:
+            if list_objs is None or list_objs == []:
+                csvfile.write("[]")
+            else:
+                if cls.__name__ == "Rectangle":
+                    fieldnames = ["id", "width", "height", "x", "y"]
+                else:
+                    fieldnames = ["id", "size", "x", "y"]
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 for obj in list_objs:
-                    writer.writerow(obj.to_csv_row())
+                    writer.writerow(obj.to_dictionary())
 
     @classmethod
     def load_from_file_csv(cls):
         """Deserialize instances from a CSV file and return as a list"""
         filename = cls.__name__ + ".csv"
-        instances = []
         try:
-            with open(filename, "r", newline="") as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    instance = cls.create_from_csv_row(row)
-                    instances.append(instance)
-        except FileNotFoundError:
-            pass
-        return instances
+            with open(filename, "r", newline="") as csvfile:
+                if cls.__name__ == "Rectangle":
+                    fieldnames = ["id", "width", "height", "x", "y"]
+                else:
+                    fieldnames = ["id", "size", "x", "y"]
+                list_dicts = csv.DictReader(csvfile, fieldnames=fieldnames)
+                list_dicts = [dict([k, int(v)] for k, v in d.items())
+                              for d in list_dicts]
+                return [cls.create(**d) for d in list_dicts]
+        except IOError:
+            return []
 
-    def to_dictionary(self):
-        """Return the dictionary representation of an instance"""
-        return self.__dict__.copy()
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """Draw Rectangles and Squares using the Turtle graphics module"""
+        turt = turtle.Turtle()
+        turt.screen.bgcolor("#b7312c")
+        turt.pensize(3)
+        turt.shape("turtle")
 
-    @classmethod
-    def create_from_csv_row(cls, row):
-        """Create an instance from a CSV row"""
-        raise NotImplementedError
+        turt.color("#ffffff")
+        for rect in list_rectangles:
+            turt.showturtle()
+            turt.up()
+            turt.goto(rect.x, rect.y)
+            turt.down()
+            for i in range(2):
+                turt.forward(rect.width)
+                turt.left(90)
+                turt.forward(rect.height)
+                turt.left(90)
+            turt.hideturtle()
 
-    def to_csv_row(self):
-        """Return the CSV row representation of an instance"""
-        raise NotImplementedError
+        turt.color("#b5e3d8")
+        for sq in list_squares:
+            turt.showturtle()
+            turt.up()
+            turt.goto(sq.x, sq.y)
+            turt.down()
+            for i in range(2):
+                turt.forward(sq.width)
+                turt.left(90)
+                turt.forward(sq.height)
+                turt.left(90)
+            turt.hideturtle()
+
+        turtle.exitonclick()
