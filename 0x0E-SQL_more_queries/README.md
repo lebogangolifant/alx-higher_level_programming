@@ -44,14 +44,11 @@ This project focuses on practicing SQL queries and database management using MyS
 
 To execute the SQL scripts in this repository, follow these steps:
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/alx-higher_level_programming.git
-   ```
+1. Clone this repository to your local machine.
 
-2. Navigate to the project directory:
+2. Open a terminal and navigate to the project directory:
    ```bash
-   cd alx-higher_level_programming/0x0E-SQL_more_queries
+   $ cd path/to/your/project/directory
    ```
 
 3. Run a script using `mysql` and provide the script filename:
