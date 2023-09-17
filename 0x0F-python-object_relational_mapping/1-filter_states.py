@@ -10,7 +10,8 @@ import sys
 
 def filter_states(username, password, database):
     """
-    Lists all states with names starting with N from the database hbtn_0e_0_usa.
+    Lists all states with names starting with N
+    from the database hbtn_0e_0_usa.
 
     Args:
         username (str): MySQL username.
