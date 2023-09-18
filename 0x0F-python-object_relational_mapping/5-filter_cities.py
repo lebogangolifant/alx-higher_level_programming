@@ -25,30 +25,28 @@ def filter_cities(username, password, database, state_name):
 
     cursor = db.cursor()
 
-    query = """
+    cursor.execute("""
     SELECT GROUP_CONCAT(cities.name SEPARATOR ', ')
     FROM cities
-    JOIN states
-    ON cities.state_id = states.id
-    WHERE states.name LIKE BINARY %(state_name)s
+    JOIN states ON cities.state_id = states.id
+    WHERE states.name LIKE BINARY %s
     ORDER BY cities.id ASC
-    """
+    """, (state_name,))
 
-    cursor.execute(query, {'state_name': state_name})
+    result = cursor.fetchone()
 
-    cities = cursor.fetchone()[0]
-
-    if cities:
-        print(cities)
+    if result and result[0]:
+        print(result[0])
 
     cursor.close()
     db.close()
 
 
 if __name__ == "__main__":
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-    state_name = sys.argv[4]
+    if len(sys.argv) == 5:
+        username = sys.argv[1]
+        password = sys.argv[2]
+        database = sys.argv[3]
+        state_name = sys.argv[4]
 
-    filter_cities(username, password, database, state_name)
+        filter_cities(username, password, database, state_name)
