@@ -29,9 +29,10 @@ def filter_states_by_name(username, password, database, state_name):
     cursor = db.cursor()
 
     query = "SELECT * FROM states WHERE name \
-            LIKE BINARY %s ORDER BY id ASC"
+            LIKE BINARY '{}' \
+            ORDER BY id ASC".format(state_name)
 
-    cursor.execute(query, (state_name,))
+    cursor.execute(query)
 
     states = cursor.fetchall()
 
