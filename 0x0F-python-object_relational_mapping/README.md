@@ -1,6 +1,6 @@
 # 0x0F. Python - Object-relational mapping
 
-This repository contains Python scripts and SQL files that demonstrate the use of SQLAlchemy for Object-Relational Mapping (ORM) with a MySQL database.
+This project contains Python scripts and SQL files that demonstrate the use of SQLAlchemy for Object-Relational Mapping (ORM) with a MySQL database.
 
 ## Dependencies
 
