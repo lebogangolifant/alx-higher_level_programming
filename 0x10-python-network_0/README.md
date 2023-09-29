@@ -29,7 +29,7 @@ This project involves creating Bash and Python scripts to perform various networ
 ```
 chmod +x script_name.sh` for each script.
 ```
-2. Run perform the specified tasks
+2. To run the specified tasks
 ```
 ./0-body_size.sh 0.0.0.0:5000
 ```
