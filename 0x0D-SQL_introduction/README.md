@@ -2,8 +2,6 @@
 
 This project provides a series of SQL scripts that demonstrate various database operations using MySQL . 
 
-# SQL Introduction Project
-
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Requirements](#requirements)
