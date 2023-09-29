@@ -17,4 +17,4 @@ if __name__ == "__main__":
 
     response = requests.post(url, data=data)
 
-    sys.stdout.write(response.text)
+    print(response.text)
