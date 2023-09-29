@@ -14,9 +14,9 @@ if __name__ == "__main__":
 
         response = requests.get(url)
 
-        sys.stdout.write(response.text)
+        print(response.text)
 
         if response.status_code >= 400:
-            sys.stderr.write(f"Error code: {response.status_code}\n")
+            print(f"Error code: {response.status_code}\n")
     else:
-        sys.stderr.write("Usage: ./7-error_code.py <URL>\n")
+        print("Usage: ./7-error_code.py <URL>\n")
