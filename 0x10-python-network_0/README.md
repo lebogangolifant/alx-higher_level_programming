@@ -33,6 +33,4 @@ chmod +x script_name.sh` for each script.
 ```
 ./0-body_size.sh 0.0.0.0:5000
 ```
-
 3. Test the scripts using the web server running on port 5000 
-
