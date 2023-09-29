@@ -1,4 +1,3 @@
-
 # 0x0E. SQL - More queries
 
 This repository contains a set of SQL scripts that demonstrate various queries and operations on a MySQL database. The scripts cover a range of tasks, from creating databases, tables, and users to performing complex queries on TV show data.
