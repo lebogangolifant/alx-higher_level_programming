@@ -2,19 +2,27 @@
 
 /* global $ */
 $(document).ready(function () {
-  $('#btn_translate').click(function () {
-    const languageCode = $('#language_code').val();
-    const apiUrl = 'https://www.fourtonfish.com/hellosalut/hello/?lang=' + languageCode;
+  // Attach click event handler to the Translate button
+  $('#btn_translate').click(translateHello);
 
-    $.ajax({
-      url: apiUrl,
-      type: 'GET',
-      success: function (data) {
-        $('DIV#hello').text(data.hello);
-      },
-      error: function () {
-        $('DIV#hello').text('Error: Language code not found');
-      }
-    });
-  });
+  // Function to fetch and display the translation
+  function translateHello () {
+    const languageCode = $('#language_code').val();
+    const apiUrl = `https://www.fourtonfish.com/hellosalut/hello/?lang=${languageCode}`;
+
+    // Send a GET request using the Fetch API
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.code && data.code === 'none') {
+          $('#hello').text('Language code not found');
+        } else {
+          $('#hello').text(data.hello);
+        }
+      })
+      .catch(error => {
+        $('#hello').text('Error: Language code not found');
+        console.error(error);
+      });
+  }
 });
